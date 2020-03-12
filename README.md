@@ -29,11 +29,7 @@ The AWS WAF Security Automations solution is developed with Node.js and Python f
 
 #### 02. Clone AWS WAF Security Automations repository
 
-Clone the aws-waf-security-automations GitHub repository:
-
-```
-git clone https://github.com/awslabs/aws-waf-security-automations.git
-```
+Clone this GitHub repository
 
 #### 03. Declare enviroment variables:
 
