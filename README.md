@@ -28,6 +28,7 @@ The following procedures assumes that all of the OS-level configuration has been
 The AWS WAF Security Automations solution is developed with Node.js and Python for the microservices that run in AWS Lambda. The latest version has been tested with Node.js v10.x and Python v3.8.
 
 #### 02. Clone AWS WAF Security Automations repository
+
 Clone the aws-waf-security-automations GitHub repository:
 
 ```
@@ -35,24 +36,36 @@ git clone https://github.com/awslabs/aws-waf-security-automations.git
 ```
 
 #### 03. Declare enviroment variables:
+
 ```
+
 export TEMPLATE_OUTPUT_BUCKET=<YOUR_TEMPLATE_OUTPUT_BUCKET>
 export DIST_OUTPUT_BUCKET=<YOUR_DIST_OUTPUT_BUCKET>
 export SOLUTION_NAME="workspaces-cost-optimizer"
 export VERSION=<VERSION>
-export AWS_REGION=<AWS_REGION>
+export AWS_REGION="us-east-1"
+
+```
+
 
 #### 04. Build the AWS WAF Security Automations solution for deployment:
+
+
 ```
 chmod +x ./build-s3-dist.sh && ./build-s3-dist.sh $TEMPLATE_OUTPUT_BUCKET $DIST_OUTPUT_BUCKET $SOLUTION_NAME $VERSION
-```
-#### 05. Upload deployment assets to your Amazon S3 bucket:
-```
-# Note that you must manually create a bucket in S3 called $DIST_OUTPUT_BUCKET-$AWS_REGION to copy the distribution. The
-# build-s3-dist.sh script DOES NOT do this and the CloudFormation template expects/references the REGION specific bucket.
 
-aws s3 cp ./dist s3://$DIST_OUTPUT_BUCKET-$AWS_REGION/aws-waf-security-automations/latest --recursive --acl bucket-owner-full-control
-aws s3 cp ./dist s3://$DIST_OUTPUT_BUCKET-$AWS_REGION/aws-waf-security-automations/$VERSION --recursive --acl bucket-owner-full-control
+```
+
+#### 05. Upload deployment assets to your Amazon S3 bucket:
+
+```
+# Note that you must manually create a bucket in S3 called $DIST_OUTPUT_BUCKET-$AWS_REGION to copy the distribution. 
+
+# The `build-s3-dist.sh` script DOES NOT do this and the CloudFormation template expects/references the REGION specific bucket.
+
+aws s3 cp ./global-s3-assets s3://$DIST_OUTPUT_BUCKET/$SOLUTION_NAME/latest --recursive --acl bucket-owner-full-control
+
+aws s3 cp ./regional-s3-assets s3://$DIST_OUTPUT_BUCKET-$AWS_REGION/$SOLUTION_NAME/$VERSION --recursive --acl bucket-owner-full-control
 ```
 
 #### 06. Deploy the AWS WAF Security Automations solution:
