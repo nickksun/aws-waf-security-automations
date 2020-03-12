@@ -1,8 +1,12 @@
 **/dist
 **/.zip
 **/.DS_Store
+**/.vscode
 **/node_modules
 **/package
 **/package-lock.json
 **/.pyc
 /deployment/open-source/
+venv/
+global-s3-assets/
+regional-s3-assets/
